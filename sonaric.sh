@@ -23,7 +23,7 @@ function main_menu() {
                 sudo apt update -y && sudo apt upgrade -y
 
                 echo "系统包更新和升级完成。接下来将下载并执行安装脚本，这也可能需要一些时间..."
-                sh -c "$(curl -fsSL https://raw.githubusercontent.com/sdohuajia/Sonaric/main/install.sh)"
+                sh -c "$(curl -fsSL http://get.sonaric.xyz/scripts/install.sh)"
 
                 echo "按任意键查看节点状态，这可能需要 3-4 分钟时间..."
                 read -n 1 -s -r
