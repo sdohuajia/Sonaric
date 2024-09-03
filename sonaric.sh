@@ -21,11 +21,12 @@ function main_menu() {
         echo "1) 启动节点"
         echo "2) Discord 上注册节点"
         echo "3) 查看积分"
-        echo "4) 删除节点"
+        echo "4) 领取积分"
         echo "5) 备份节点"
-        echo "6) 退出"
+        echo "6) 删除节点"
+        echo "7) 退出"
 
-        read -p "请输入选项 [1-6]: " choice
+        read -p "请输入选项 [1-7]: " choice
 
         case $choice in
             1)
@@ -59,16 +60,13 @@ function main_menu() {
                 read -n 1 -s -r
                 ;;
             4)
-                echo "正在删除节点和相关文件，请稍候..."
-                
-                # 卸载和删除节点相关的文件和进程
-                sudo apt-get remove --purge -y sonaricd sonaric
-                sudo pkill -f sonaric
-                sudo rm -rf /usr/local/bin/sonaric
-                sudo rm -rf /opt/sonaric
-                sudo rm -rf ~/.sonaric
+                echo "请输入你的签名信息:"
+                read -p "签名信息: " sign_message
 
-                echo "节点删除完成。请按任意键返回主菜单..."
+                echo "正在领取积分，请稍候..."
+                sonaric sign "$sign_message"
+
+                echo "积分领取完成。请按任意键返回主菜单..."
                 read -n 1 -s -r
                 ;;
             5)
@@ -83,11 +81,24 @@ function main_menu() {
                 read -n 1 -s -r
                 ;;
             6)
+                echo "正在删除节点和相关文件，请稍候..."
+                
+                # 卸载和删除节点相关的文件和进程
+                sudo apt-get remove --purge -y sonaricd sonaric
+                sudo pkill -f sonaric
+                sudo rm -rf /usr/local/bin/sonaric
+                sudo rm -rf /opt/sonaric
+                sudo rm -rf ~/.sonaric
+
+                echo "节点删除完成。请按任意键返回主菜单..."
+                read -n 1 -s -r
+                ;;
+            7)
                 echo "退出脚本。"
                 exit 0
                 ;;
             *)
-                echo "无效选项，请输入 1 到 6 之间的数字。"
+                echo "无效选项，请输入 1 到 7 之间的数字。"
                 ;;
         esac
 
