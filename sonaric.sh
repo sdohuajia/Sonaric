@@ -21,7 +21,7 @@ function main_menu() {
         echo "1) 启动节点"
         echo "2) Discord 上注册节点"
         echo "3) 查看积分"
-        echo "4) 领取积分"
+        echo "4) 领取积分（暂不可用）"
         echo "5) 备份节点"
         echo "6) 删除节点"
         echo "7) 退出"
