@@ -24,9 +24,10 @@ function main_menu() {
         echo "4) 领取积分（暂不可用）"
         echo "5) 备份节点"
         echo "6) 删除节点"
-        echo "7) 退出"
+        echo "7) 查看节点状态"
+        echo "8) 退出"
 
-        read -p "请输入选项 [1-7]: " choice
+        read -p "请输入选项 [1-8]: " choice
 
         case $choice in
             1)
@@ -71,8 +72,6 @@ function main_menu() {
                 ;;
             5)
                 echo "正在备份节点数据，请稍候..."
-
-                # 备份节点相关数据
                 sudo cp -r /var/lib/sonaricd ~/.sonaric_backup
 
                 echo "备份完成。请妥善保管备份文件，包括节点身份、数据库、配置文件和日志。"
@@ -82,8 +81,6 @@ function main_menu() {
                 ;;
             6)
                 echo "正在删除节点和相关文件，请稍候..."
-                
-                # 卸载和删除节点相关的文件和进程
                 sudo apt-get remove --purge -y sonaricd sonaric
                 sudo pkill -f sonaric
                 sudo rm -rf /usr/local/bin/sonaric
@@ -94,15 +91,20 @@ function main_menu() {
                 read -n 1 -s -r
                 ;;
             7)
+                echo "正在查看节点状态，请稍候..."
+                sonaric node-info
+                echo "节点状态查看完成。请按任意键返回主菜单..."
+                read -n 1 -s -r
+                ;;
+            8)
                 echo "退出脚本。"
                 exit 0
                 ;;
             *)
-                echo "无效选项，请输入 1 到 7 之间的数字。"
+                echo "无效选项，请输入 1 到 8 之间的数字。"
                 ;;
         esac
 
-        # 等待用户按任意键返回主菜单
         echo "按任意键返回主菜单..."
         read -n 1 -s -r
     done
